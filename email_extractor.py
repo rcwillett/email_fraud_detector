@@ -17,6 +17,7 @@ for fle in listing:
     try:
         if str.lower(fle[-3:])=="eml":
             email_dict = {}
+            content = ''
             fp = open(f'{path}{fle}', 'rb')  # select a specific email file from the list
             name = fp.name # Get file name
             msg = email.parser.BytesParser().parse(fp)
@@ -24,21 +25,21 @@ for fle in listing:
             email_dict['from'] = msg['From']
             cp = msg.get_content_type()
             if (cp == 'multipart/alternative'):
-                html = ''
                 y = 0
                 while 1:
                     # If we cannot get the payload, it means we hit the end:
                     try:
                         pl = msg.get_payload(y)
                     except: break
-                    html += pl.as_string()
+                    content += pl.as_string()
                     y += 1
             elif (cp == 'text/html'):
-                html = msg.get_payload()
-            if html.isascii():
-                decoded = quopri.decodestring(html)
+                content = msg.get_payload()
+            elif (cp == 'text/plain'):
+                content = msg.get_payload()
+            if content.isascii() and content != '':
+                decoded = quopri.decodestring(content)
                 soup = BeautifulSoup(decoded, features="html.parser")
-                links = soup.find_all('a', href=True)
                 text = soup.get_text()
                 text = re.sub('Content\-Type\:.*', '', text)
                 text = re.sub('Content\-Transfer\-Encoding:.*', '', text)
