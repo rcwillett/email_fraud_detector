@@ -23,6 +23,7 @@ for fle in listing:
             msg = email.parser.BytesParser().parse(fp)
             email_dict['subject'] = msg['Subject']
             email_dict['from'] = msg['From']
+            email_dict['to'] = msg['To']
             cp = msg.get_content_type()
             if (cp == 'multipart/alternative'):
                 y = 0
@@ -56,6 +57,6 @@ for fle in listing:
             fp.close()
     except:
         failed += 1
-df = pd.DataFrame(data=email_content_list, columns=['from', 'subject', 'content'])
+df = pd.DataFrame(data=email_content_list, columns=['from', 'to', 'subject', 'content'])
 df.to_csv(sys.argv[2], index=False)
 print(f'Successfully processed: {success}\nFailed to process: {failed}')
