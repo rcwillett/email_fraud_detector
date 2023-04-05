@@ -31,4 +31,7 @@ This file contains an evaluation of the transfer learning model built on the BER
 
 ## Data Sources
 
-TODO: Add data sources
+[Kaggle Fraud Email Dataset](https://www.kaggle.com/datasets/pramodgupta92/fraud-email-datasets)
+[Phishing Email Data by Type](https://www.kaggle.com/datasets/charlottehall/phishing-email-data-by-type)
+[Phishing Academic Torrent](https://academictorrents.com/details/a77cda9a9d89a60dbdfbe581adf6e2df9197995a)
+[Apache Spam Assassin Public Corpus](https://spamassassin.apache.org/old/publiccorpus/)
