@@ -1,5 +1,12 @@
-FROM continuumio/conda-ci-linux-64-python3.8
-COPY . .
-RUN conda create --name server --file requirements.txt
-RUN conda activate capstone
-RUN python './server.py'
+
+    FROM continuumio/conda-ci-linux-64-python3.8 AS base
+    COPY . .
+    RUN conda config --add channels conda-forge
+    RUN conda env create -f requirements.yml
+    RUN conda activate capstone
+
+    FROM base AS server
+    RUN python ./server.py
+
+    FROM base AS notebook
+    RUN python -m notebook
