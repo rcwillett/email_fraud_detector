@@ -65,9 +65,9 @@ def get_word_count(text):
     # Filter string to alphabetical characters and spaces only
     alpha_only_text = re.sub(r'[^a-zA-Z\s]', '', text)
     # Remove any instances of repeated spaces
-    no_space_alpha_text = re.sub(r'\s\s+', ' ', text)
+    no_space_alpha_text = re.sub(r'\s\s+', ' ', alpha_only_text)
     # split sentence into words by splitting on spaces
-    listofwords = alpha_only_text.split(' ')
+    listofwords = no_space_alpha_text.split(' ')
     # Return the length of the resulting word list
     return len(listofwords)
 
