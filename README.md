@@ -40,19 +40,23 @@ This notebook contains the code used for the generation of a transfer learning m
 
 This notebook contains an evaluation of the transfer learning model built on the BERT transformer.
 
-## TextTransformers.py
+### TextTransformers.py
 
 A module used in several notebooks and other files containing functions to transform the text content of emails.
 
-## ContentTransformer.py
+### ContentTransformer.py
 
 A module used in some notebooks and the server with a function to transform text data into a format usable for the simple models created in this project.
 
-## eml_rename.py
+### server.py
+
+A file containing code to run a Flask app to act as a api with an endpoint to provide model predictions provided text content sent through http calls.
+
+### eml_rename.py
 
 A python script used to rename files to ones with a .eml extension (This was necessary for extracting raw email content)
 
-## email_extractor.py
+### email_extractor.py
 
 A python script used to extract data from all .eml files in a given directory, and combine this data into a csv file.
 
