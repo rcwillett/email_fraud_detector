@@ -5,5 +5,5 @@ services:
       context: .
       target: notebook
     ports:
-      - '8080:8080'
-    expose: ['8080']
+      - '8000:8000'
+    expose: ['8000']
