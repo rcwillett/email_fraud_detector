@@ -1,6 +1,7 @@
 data/
 img/
 models/
+history/
 .ipynb_checkpoints/
 .DS_Store
 __pycache__/

@@ -4,25 +4,49 @@
 
 The purpose of this project is to build a machine learning model which can identify if an email is fraud based solely on the text content of that email. First data to train a model on was aquired, cleaned and combined. Next, this data was analyzed and several simple models were built using it. Finally a neural network using transfer learning from a BERT encoding model was built and trained for this identification task.
 
-## Running the Notebooks
+## Running the Notebooks locally with Anaconda
 
 In order to run the contents of the notebook files, several steps must be taken. First, the "Anaconda" software must be installed on the host machine. (Currently version 23.1.0 is used for this project) Next, the following command must be run from the command line in the root directory of this project:
 
-`conda create --name capstone --file requirements.txt`
+`conda env create -f requirements.yml`
 
-Once this is done, a conda environment should be ready for use with the notebook files. If an error of an unfound kernal is displayed simply select the "capstone" conda environment kernal from the available options.
+Once this is done, a conda environment called "capstone" should be ready for use with the notebook files. If an error of an unfound kernal is displayed simply select the "capstone" conda environment kernal from the available options.
 
-In order to run the notebooks, the data (located in csv files) will need to be extracted into a "data" folder in the working directory of this project. (Link to files provided if you are given the correct permissions)
+In order to run the notebooks, the data (located in csv files) will need to be extracted into a "data" folder in the working directory of this project. (Link to files provided if you are given the correct permissions) All built models will also need to be extracted to a "models" folder in the working directory of this project. (Link to files provided if you are given the correct permissions)
 
 The Jupyter notebooks should be ready to be run once this is done.
 
+## Running the Notebooks with Docker
+
+To start a docker container that will run notebooks for this project, docker will need to be installed on your machine and the following command executed from the directory of the project:
+
+`docker compose -f docker-compose.notebook.yml up`
+
+**NOTE:** This command may take several minutes to complete running
+
+This will build, and start a docker container that will start an instance of jupyter notebooks on port 8080.
+
+Note that in order to run the notebooks, the data (located in csv files) will need to be extracted into a "data" folder in the working directory of this project. (Link to files provided if you are given the correct permissions) All built models will also need to be extracted to a "models" folder in the working directory of this project. (Link to files provided if you are given the correct permissions)
+
+## Running the server with Docker
+
+To start a docker container that will run the server used to return model results, docker will need to be installed on your machine and the following command executed from the directory of the project:
+
+`docker compose -f docker-compose.server.yml up`
+
+**NOTE:** This command may take several minutes to complete running
+
+This will build start a docker container that will run an instance of the server on port 8000.
+
+Note that in order to run the server the built model will need to be located in a "models" folder in the working directory of this project. (Link to files provided if you are given the correct permissions)
+
 ## Files
 
-This section details the notebooks included in this project and a brief description of what each notebook contains.
+This section details the python files included in this project and a brief description of what each contains.
 
 ### Email_Fraud_Detection_1_Data_Cleaning.ipynb
 
-This notebook contains the analysis and cleaning performed for of the various data sets that were acquired and combined to train resulting machine learning models on.
+This notebook contains the analysis and cleaning performed for the various data sets that were acquired and combined to train machine learning models on.
 
 ### Email_Fraud_Detection_2_Data_Analysis.ipynb
 
@@ -40,13 +64,17 @@ This notebook contains the code used for the generation of a transfer learning m
 
 This notebook contains an evaluation of the transfer learning model built on the BERT transformer.
 
+### ContentTransformer.py
+
+A module used in some notebooks and the server with a function to transform text data into a format usable for the simple models created in this project.
+
 ### TextTransformers.py
 
 A module used in several notebooks and other files containing functions to transform the text content of emails.
 
-### ContentTransformer.py
+### Tokenizer.py
 
-A module used in some notebooks and the server with a function to transform text data into a format usable for the simple models created in this project.
+A module used in several notebooks and other files containing a function used to tokenize text results.
 
 ### server.py
 
