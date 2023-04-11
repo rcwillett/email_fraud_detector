@@ -1,9 +1,0 @@
-version: "3.9"
-services:
-  server:
-    build:
-      context: .
-      target: notebook
-    ports:
-      - '8000:8000'
-    expose: ['8000']

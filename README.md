@@ -16,30 +16,6 @@ In order to run the notebooks, the data (located in csv files) will need to be e
 
 The Jupyter notebooks should be ready to be run once this is done.
 
-## Running the Notebooks with Docker
-
-To start a docker container that will run notebooks for this project, docker will need to be installed on your machine and the following command executed from the directory of the project:
-
-`docker compose -f docker-compose.notebook.yml up`
-
-**NOTE:** This command may take several minutes to complete running
-
-This will build, and start a docker container that will start an instance of jupyter notebooks on port 8080.
-
-Note that in order to run the notebooks, the data (located in csv files) will need to be extracted into a "data" folder in the working directory of this project. (Link to files provided if you are given the correct permissions) All built models will also need to be extracted to a "models" folder in the working directory of this project. (Link to files provided if you are given the correct permissions)
-
-## Running the server with Docker
-
-To start a docker container that will run the server used to return model results, docker will need to be installed on your machine and the following command executed from the directory of the project:
-
-`docker compose -f docker-compose.server.yml up`
-
-**NOTE:** This command may take several minutes to complete running
-
-This will build start a docker container that will run an instance of the server on port 8000.
-
-Note that in order to run the server the built model will need to be located in a "models" folder in the working directory of this project. (Link to files provided if you are given the correct permissions)
-
 ## Files
 
 This section details the python files included in this project and a brief description of what each contains.
