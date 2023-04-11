@@ -3,7 +3,9 @@
     USER root
     COPY . .
     RUN conda config --add channels conda-forge
-    RUN conda env create -f requirements.yml && conda activate capstone
+    RUN conda env create -f requirements.yml
+    RUN conda init bash
+    RUN conda activate capstone
 
     FROM base AS server
     RUN python ./server.py
