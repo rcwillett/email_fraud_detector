@@ -3,7 +3,7 @@ services:
   server:
     build:
       context: .
-      target: server
+      target: notebook
     ports:
       - '8080:8080'
     expose: ['8080']

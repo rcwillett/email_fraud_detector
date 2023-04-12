@@ -43,12 +43,14 @@ def predict_sentiment():
     # Put input into format model can digest
     model_input = [input_json['content']]
     # Get the model's estimate for whether the email is fraud or not
-    chance_fraud = bert_model.predict(model_input)[0]
+    chance_fraud = bert_model.predict(model_input)[0][0]
     # Threshold the result to estimate if email is fraud or not
-    is_fraud = chance_fraud >= 0.4
+    is_fraud = chance_fraud >= 0.5
+
+    print({"chance_fraud": chance_fraud, "is_fraud": is_fraud})
 
     # Return a JSON response to the requester
-    return jsonify({"chance_fraud": chance_fraud, "is_fraud": is_fraud})
+    return jsonify({"chance_fraud": f'{chance_fraud}', "is_fraud": f'{is_fraud}'})
 
 # Run the Flask app if this is the main file
 if __name__ == "__main__":
