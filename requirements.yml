@@ -8,6 +8,7 @@ dependencies:
   - nltk
   - numpy
   - flask
+  - flask-cors
   - tensorflow=2.10.0
   - scikit-learn
   - beautifulsoup4

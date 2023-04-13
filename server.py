@@ -8,9 +8,11 @@ import tensorflow_text
 
 # Import flask
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 
 # Initialize Flask app
 app = Flask("Fraud_Email_Identifier")
+CORS(app)
 
 # Load trained BERT model for identification
 # Load the saved model into Keras
@@ -49,8 +51,10 @@ def predict_sentiment():
 
     print({"chance_fraud": chance_fraud, "is_fraud": is_fraud})
 
-    # Return a JSON response to the requester
-    return jsonify({"chance_fraud": f'{chance_fraud}', "is_fraud": f'{is_fraud}'})
+    response = jsonify({"chance_fraud": f'{chance_fraud}', "is_fraud": f'{is_fraud}'})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
 
 @app.route('/', methods=['GET'])
 def health_check():
