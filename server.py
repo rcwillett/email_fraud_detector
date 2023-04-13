@@ -52,6 +52,10 @@ def predict_sentiment():
     # Return a JSON response to the requester
     return jsonify({"chance_fraud": f'{chance_fraud}', "is_fraud": f'{is_fraud}'})
 
+@app.route('/', methods=['GET'])
+def health_check():
+    return jsonify(success=True)
+
 # Run the Flask app if this is the main file
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000)
