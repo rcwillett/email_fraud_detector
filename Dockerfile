@@ -1,11 +1,11 @@
 
-FROM ubuntu:latest@sha256:7a57c69fe1e9d5b97c5fe649849e79f2cfc3bf11d10bbd5218b4eb61716aebe6 AS base
+FROM --platform=linux/amd64 ubuntu:latest AS base
 RUN  apt-get update \
     && apt-get install -y wget \
     && rm -rf /var/lib/apt/lists/*
     
-RUN wget https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh &&\
-    bash Anaconda3-2023.03-Linux-x86_64.sh -b -p $HOME/anaconda3 &&\
+RUN wget https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh
+RUN bash Anaconda3-2023.03-Linux-x86_64.sh -b -p $HOME/anaconda3 &&\
     echo 'export PATH=$PATH:$HOME/anaconda3/bin' >>~/.bash_profile
 
 # USER root
