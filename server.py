@@ -6,13 +6,13 @@ from tensorflow import keras
 import tensorflow_hub as hub
 import tensorflow_text
 
-# Import flask
-from flask import Flask, request, jsonify
-from flask_cors import CORS, cross_origin
+# Import fast api
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
-# Initialize Flask app
-app = Flask("Fraud_Email_Identifier")
-CORS(app)
+# Import uvicorn
+import uvicorn
 
 # Load trained BERT model for identification
 # Load the saved model into Keras
@@ -32,34 +32,46 @@ bert_model.compile(
     metrics=[keras.metrics.BinaryAccuracy(), keras.metrics.Recall()]
 )
 
+# Initialize fast api app
+app = FastAPI()
+
+origins = [
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class FraudBody(BaseModel):
+    content: str
+
 # Set up route for predicting results
-@app.route('/identifyFraudEmail/', methods=['POST'])
-def predict_sentiment():
+@app.post('/identifyFraudEmail/')
+def predict_sentiment(input_json: FraudBody):
     # Parse JSON from post request
-    input_json = request.get_json(force=True)
 
     # Verify input json has correct values and throw exception if not
-    if type(input_json['content']) != str:
+    if type(input_json.content) != str:
         raise Exception('The request must contain text content')
 
     # Put input into format model can digest
-    model_input = [input_json['content']]
+    model_input = [input_json.content]
     # Get the model's estimate for whether the email is fraud or not
     chance_fraud = bert_model.predict(model_input)[0][0]
     # Threshold the result to estimate if email is fraud or not
     is_fraud = chance_fraud >= 0.5
 
-    print({"chance_fraud": chance_fraud, "is_fraud": is_fraud})
+    return {"chance_fraud": f'{chance_fraud}', "is_fraud": f'{is_fraud}'}
 
-    response = jsonify({"chance_fraud": f'{chance_fraud}', "is_fraud": f'{is_fraud}'})
-    response.headers.add('Access-Control-Allow-Origin', '*')
-
-    return response
-
-@app.route('/', methods=['GET'])
+@app.get('/')
 def health_check():
-    return jsonify(success=True)
+    return { "success": True }
 
 # Run the Flask app if this is the main file
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000)
+    uvicorn.run(app, host='0.0.0.0', port=8000)
