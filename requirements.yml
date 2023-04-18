@@ -2,10 +2,11 @@ name: capstone
 channels:
   - defaults
 dependencies:
+  - python=3.9
+  - pip=23.0.1
   - seaborn
   - nltk
   - numpy
-  - flask
   - tensorflow=2.10.0
   - scikit-learn
   - beautifulsoup4
@@ -13,7 +14,10 @@ dependencies:
   - matplotlib
   - tensorflow-hub
   - ipykernel
+  - pydantic
+  - uvicorn
   - pip:
     - shap==0.41.0
     - tensorflow-text==2.10.0
+    - fastapi
 prefix: /Applications/anaconda3/envs/test
