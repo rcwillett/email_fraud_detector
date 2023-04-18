@@ -18,4 +18,4 @@ FROM base AS server
 CMD conda run -n capstone --live-stream python ./server.py
 
 FROM base AS notebook
-CMD conda run -n capstone --live-stream python ./server.py
+CMD jupyter notebook --allow-root --ip 0.0.0.0 --no-browser --port=8080

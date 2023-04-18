@@ -4,6 +4,10 @@
 
 The purpose of this project is to build a machine learning model which can identify if an email is fraud based solely on the text content of that email. First data to train a model on was aquired, cleaned and combined. Next, this data was analyzed and several simple models were built using it. Finally a neural network using transfer learning from a BERT encoding model was built and trained for this identification task.
 
+## Live Preview
+
+Currently a web app hosted at [https://rosswillett.ca/emailIdentifier](https://rosswillett.ca/emailIdentifier) can be used to view the predictive outputs of the final BERT model used for fraud email detection in this project.
+
 ## Running the Notebooks locally with Anaconda
 
 In order to run the contents of the notebook files, several steps must be taken. First, the "Anaconda" software must be installed on the host machine. (Currently version 23.1.0 is used for this project) Next, the following command must be run from the command line in the root directory of this project:
@@ -90,7 +94,7 @@ A python script used to extract data from all .eml files in a given directory, a
 
 ## Data Sources
 
-[Kaggle Fraud Email Dataset](https://www.kaggle.com/datasets/pramodgupta92/fraud-email-datasets)
-[Phishing Email Data by Type](https://www.kaggle.com/datasets/charlottehall/phishing-email-data-by-type)
-[Phishing Academic Torrent](https://academictorrents.com/details/a77cda9a9d89a60dbdfbe581adf6e2df9197995a)
-[Apache Spam Assassin Public Corpus](https://spamassassin.apache.org/old/publiccorpus/)
+- [Kaggle Fraud Email Dataset](https://www.kaggle.com/datasets/pramodgupta92/fraud-email-datasets)
+- [Phishing Email Data by Type](https://www.kaggle.com/datasets/charlottehall/phishing-email-data-by-type)
+- [Phishing Academic Torrent](https://academictorrents.com/details/a77cda9a9d89a60dbdfbe581adf6e2df9197995a)
+- [Apache Spam Assassin Public Corpus](https://spamassassin.apache.org/old/publiccorpus/)
