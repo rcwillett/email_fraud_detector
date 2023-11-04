@@ -40,7 +40,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ${{ vars.REGISTRY }}/${{ secrets.AzureAppService_ContainerUsername_351411bce25c47b7a39b189f14a7d063 }}/${{ vars.NAMESPACE }}/${{ vars.IMAGE }}:${{ github.sha }}
+        tags: ${{ vars.REGISTRY }}/${{ vars.NAMESPACE }}/${{ vars.IMAGE }}:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
