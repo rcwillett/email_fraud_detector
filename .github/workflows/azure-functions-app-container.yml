@@ -38,12 +38,12 @@ permissions:
   contents: read
 
 env:
-  AZURE_FUNCTIONAPP_NAME: 'EmailFraudDetector'   # set this to your function app name on Azure
-  LOGIN_SERVER: 'fraudemailidentifier.azurecr.io'              # set this to login server for your private container registry (e.g. 'contoso.azurecr.io', 'index.docker.io' )
-  REGISTRY: 'FraudEmailIdentifier'                 # set this to proper value for REGISTRY
-  NAMESPACE: 'fraudemailidentifier'               # set this to proper value for NAMESPACE
-  IMAGE: 'fraudemailidentifier'                       # set this to proper value for IMAGE
-  TAG: 'latest'                           # set this to proper value for TAG
+  AZURE_FUNCTIONAPP_NAME: ${{ vars.AZURE_FUNCTIONAPP_NAME }}   # set this to your function app name on Azure
+  LOGIN_SERVER: ${{ vars.LOGIN_SERVER }}              # set this to login server for your private container registry (e.g. 'contoso.azurecr.io', 'index.docker.io' )
+  REGISTRY: ${{ vars.REGISTRY }}                 # set this to proper value for REGISTRY
+  NAMESPACE: ${{ vars.NAMESPACE }}               # set this to proper value for NAMESPACE
+  IMAGE: ${{ vars.IMAGE }}                       # set this to proper value for IMAGE
+  TAG: ${{ vars.TAG }}                         # set this to proper value for TAG
 
 jobs:
   build-and-deploy:
