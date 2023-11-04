@@ -7,7 +7,17 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+      workflow_dispatch:
+        inputs:
+          logLevel:
+            description: 'Log level'
+            required: true
+            default: 'warning'
+            type: choice
+            options:
+            - info
+            - warning
+            - debug
 
 jobs:
   build:
@@ -22,7 +32,7 @@ jobs:
     - name: Log in to registry
       uses: docker/login-action@v2
       with:
-        registry: https://fraudemailidentifier.azurecr.io/
+        registry: ${{ vars.REGISTRY }}
         username: ${{ secrets.AzureAppService_ContainerUsername_351411bce25c47b7a39b189f14a7d063 }}
         password: ${{ secrets.AzureAppService_ContainerPassword_4a10a9cf63d444c2b3b650cdca5ac35d }}
 
@@ -30,7 +40,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: fraudemailidentifier.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_351411bce25c47b7a39b189f14a7d063 }}/fraudemailidentifier/fraudemailidentifier:${{ github.sha }}
+        tags: ${{ vars.REGISTRY }}/${{ secrets.AzureAppService_ContainerUsername_351411bce25c47b7a39b189f14a7d063 }}/${{ vars.NAMESPACE }}/${{ vars.IMAGE }}:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +58,4 @@ jobs:
         app-name: 'fraudemailidentifier'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_b79931368eef499294e3d448dafd5572 }}
-        images: 'fraudemailidentifier.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_351411bce25c47b7a39b189f14a7d063 }}/fraudemailidentifier/fraudemailidentifier:${{ github.sha }}'
+        images: '${{ vars.REGISTRY }}/${{ secrets.AzureAppService_ContainerUsername_351411bce25c47b7a39b189f14a7d063 }}/${{ vars.NAMESPACE }}/${{ vars.IMAGE }}:${{ github.sha }}'

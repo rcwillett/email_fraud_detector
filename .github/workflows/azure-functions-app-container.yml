@@ -31,8 +31,6 @@ on:
         - info
         - warning
         - debug
-  push:
-    branches: ["main"]
 
 permissions:
   contents: read
