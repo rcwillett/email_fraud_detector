@@ -17,6 +17,9 @@ SHELL ["bash", "-lc"]
 RUN conda config --add channels conda-forge &&\
     conda env create -f requirements.yml
 
+RUN chmod +rwx ./start.sh
+ENTRYPOINT ["bash", "-lv", "./start.sh"]
+
 FROM base AS server
 CMD conda run -n capstone --live-stream python ./server.py
 
