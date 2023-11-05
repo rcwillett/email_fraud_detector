@@ -14,6 +14,8 @@ SHELL ["bash", "-lc"]
 RUN conda config --add channels conda-forge &&\
     conda env create -f requirements.yml
 
+RUN curl -o ./models/bert_model_20_relu_sig.h5 https://rosswillett.blob.core.windows.net/models/bert_model_20_relu_sig.h5
+
 FROM base AS server
 CMD conda run -n capstone --live-stream python ./server.py
 
