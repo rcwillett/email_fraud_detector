@@ -1,0 +1,1 @@
+conda run -n capstone --live-stream python ./server.py

@@ -74,4 +74,4 @@ def health_check():
 
 # Run the Flask app if this is the main file
 if __name__ == "__main__":
-    uvicorn.run(app, host='0.0.0.0', port=8181)
+    uvicorn.run(app, host='0.0.0.0', port=80)
